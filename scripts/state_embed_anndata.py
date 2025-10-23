@@ -40,6 +40,7 @@ def main():
     args = parse_args()
 
     conf = OmegaConf.load(args.config)
+    print
     inferer = Inference(conf)
     inferer.load_model(args.checkpoint)
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
