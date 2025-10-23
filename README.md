@@ -1,5 +1,31 @@
 # Predicting cellular responses to perturbation across diverse contexts with State
-
+> **Note (Isambard adaptation)**  
+> This repository has been adjusted for running on **Isambard**.  
+> - Certain configuration files and paths have been modified for the Isambard environment.  
+> - All datasets required for training and testing are **already downloaded on Isambard**, and their paths have been added to the configuration.  
+> - To ensure proper experiment tracking with Weights & Biases (W&B), update the entity field in the config file before running:
+>   ```bash
+>   cd state
+>   ! sed -i 's|entity: baovincentweiye-vc|entity: {your wandb entity}|g' src/state/configs/wandb/default.yaml
+>   ```
+>   Replace `{your wandb entity}` with your own W&B entity name, and make sure you have a **project named `state`** under that entity.
+>
+> - In the `state` directory, run the following command to install and verify the setup:
+>     ```bash
+>     uv run state --help
+>     ```
+>     `uv` will automatically create a dedicated **virtual environment** based on `pyproject.toml` inside the `state` folder.
+>     All packages will be installed into this environment, ensuring that installations **do not pollute your external Conda or system environment**.
+>
+> - For training and inference, submit jobs directly from the `scripts` folder using SLURM:
+>   ```bash
+>   sbatch train.sh
+>   sbatch inference.sh
+>   ```
+>   Before running, edit the `.sh` files to:
+>   -  Use any environment you own that includes `uv`.
+>   -  Update the job name, resource settings (e.g., time, GPU type, memory), and log paths as needed for your tasks
+>   
 > Train State transition models or pretrain State embedding models. See the State [paper](https://www.biorxiv.org/content/10.1101/2025.06.26.661135v2).
 > 
 > See the [Google Colab](https://colab.research.google.com/drive/1QKOtYP7bMpdgDJEipDxaJqOchv7oQ-_l) to train STATE for the [Virtual Cell Challenge](https://virtualcellchallenge.org/).
